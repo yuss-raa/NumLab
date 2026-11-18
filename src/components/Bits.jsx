@@ -10,12 +10,12 @@ const TONES = {
 /** A row of single-bit cells. `warnFirst` marks an extra (overflow) sign bit. */
 export function Bits({ value, tone = 'a', warnFirst = false, label }) {
   return (
-    <div className="flex flex-wrap gap-1" role="img" aria-label={`${label}: ${value}`}>
+    <div className="flex flex-nowrap sm:flex-wrap gap-1" role="img" aria-label={`${label}: ${value}`}>
       {[...value].map((bit, index) => (
         <span
           key={index}
           className={cx(
-            'flex h-8 w-7 items-center justify-center rounded-md border font-mono text-sm font-semibold',
+            'flex h-8 w-7 shrink-0 items-center justify-center rounded-md border font-mono text-sm font-semibold',
             warnFirst && index === 0 ? TONES.warn : TONES[tone],
           )}
         >
@@ -28,7 +28,7 @@ export function Bits({ value, tone = 'a', warnFirst = false, label }) {
 
 function Group({ caption, children }) {
   return (
-    <div className="min-w-0">
+    <div className="min-w-0 shrink-0">
       <p className="mb-1 text-[11px] font-semibold uppercase tracking-wider text-nl-muted">{caption}</p>
       {children}
     </div>
@@ -38,9 +38,9 @@ function Group({ caption, children }) {
 /** One snapshot of the combined register: A | Q | Q-1 (Q and Q-1 optional). */
 export function RegisterLine({ title, A, Q, Qm1, warnA = false }) {
   return (
-    <div className="grid gap-2 rounded-xl border border-nl-border bg-nl-bg/50 p-3 sm:grid-cols-[8.5rem_1fr] sm:items-center sm:gap-4">
-      <p className="text-sm font-semibold text-nl-ink">{title}</p>
-      <div className="flex flex-wrap items-end gap-x-5 gap-y-2">
+    <div className="grid gap-2 rounded-xl border border-nl-border bg-nl-bg/50 p-3 sm:grid-cols-[8.5rem_1fr] sm:items-center sm:gap-4 overflow-hidden">
+      <p className="text-sm font-semibold text-nl-ink shrink-0">{title}</p>
+      <div className="flex max-w-full items-end gap-x-5 gap-y-2 overflow-x-auto pb-1.5 pt-0.5">
         <Group caption={warnA ? 'A (bits + 1)' : 'A'}>
           <Bits value={A} tone="a" warnFirst={warnA} label="A register" />
         </Group>

@@ -77,10 +77,7 @@
 @layer base {
   html {
     -webkit-text-size-adjust: 100%;
-    /* Fluid root size: 16px up to about 1400px wide, then grows smoothly
-       (about 17.6px at 1920px, 20.8px at 2560px, capped at 28px).
-       Every size in the app is in rem, so the whole UI scales with it. */
-    font-size: clamp(1rem, 0.5vw + 0.5rem, 1.75rem);
+    font-size: 100%;
   }
   body {
     background-color: var(--nl-bg);

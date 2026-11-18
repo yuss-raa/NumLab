@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import Sidebar, { MobileBar } from './components/Sidebar.jsx';
+import Sidebar, { TopBar } from './components/Sidebar.jsx';
 import { useHistory } from './hooks/useHistory.js';
 import { useTheme } from './hooks/useTheme.js';
 import About from './pages/About.jsx';
@@ -32,12 +32,15 @@ export default function App() {
         onNavigate={navigate}
         open={navOpen}
         onClose={() => setNavOpen(false)}
-        theme={theme}
-        onToggleTheme={toggleTheme}
       />
-      <div className="lg:pl-64">
-        <MobileBar onOpen={() => setNavOpen(true)} theme={theme} onToggleTheme={toggleTheme} />
-        <main className="mx-auto w-full max-w-[90rem] px-4 py-6 sm:px-6 lg:px-10 lg:py-10 2xl:px-14 2xl:py-12">
+      <div className="flex min-h-screen flex-col lg:pl-64">
+        <TopBar
+          page={page}
+          onOpenNav={() => setNavOpen(true)}
+          theme={theme}
+          onToggleTheme={toggleTheme}
+        />
+        <main className="mx-auto w-full max-w-[90rem] flex-1 px-4 py-6 sm:px-6 lg:px-10 lg:py-10 2xl:px-14 2xl:py-12">
           {page === 'dashboard' && <Dashboard entries={entries} onNavigate={navigate} />}
           {page === 'multiplier' && <Multiplier preset={presetFor('multiplier')} onSave={add} />}
           {page === 'booth' && <BoothAnalyser preset={presetFor('booth')} onSave={add} />}

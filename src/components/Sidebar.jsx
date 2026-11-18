@@ -73,13 +73,12 @@ function NavList({ page, onNavigate }) {
   );
 }
 
-function SidebarBody({ page, onNavigate, theme, onToggleTheme }) {
+function SidebarBody({ page, onNavigate }) {
   return (
-    <div className="flex h-full flex-col gap-8 p-5">
-      <Logo />
-      <NavList page={page} onNavigate={onNavigate} />
-      <div className="mt-auto flex flex-col gap-3">
-        <ThemeToggle theme={theme} onToggle={onToggleTheme} />
+    <div className="flex h-full flex-col justify-between gap-6 p-5 overflow-y-auto">
+      <div className="flex flex-col gap-8">
+        <Logo />
+        <NavList page={page} onNavigate={onNavigate} />
       </div>
       <div className="rounded-xl bg-nl-softpurple/70 p-4">
         <p className="text-xs font-bold uppercase tracking-wider text-violet-700">COA project</p>
@@ -92,11 +91,11 @@ function SidebarBody({ page, onNavigate, theme, onToggleTheme }) {
 }
 
 /** Fixed sidebar on large screens, slide-over drawer below. */
-export default function Sidebar({ page, onNavigate, open, onClose, theme, onToggleTheme }) {
+export default function Sidebar({ page, onNavigate, open, onClose }) {
   return (
     <>
       <aside className="fixed inset-y-0 left-0 z-30 hidden w-64 border-r border-nl-border bg-nl-card lg:block">
-        <SidebarBody page={page} onNavigate={onNavigate} theme={theme} onToggleTheme={onToggleTheme} />
+        <SidebarBody page={page} onNavigate={onNavigate} />
       </aside>
 
       {open && (
@@ -105,9 +104,9 @@ export default function Sidebar({ page, onNavigate, open, onClose, theme, onTogg
             type="button"
             aria-label="Close menu"
             onClick={onClose}
-            className="absolute inset-0 bg-black/40"
+            className="absolute inset-0 bg-black/40 backdrop-blur-xs"
           />
-          <aside className="absolute inset-y-0 left-0 w-72 max-w-[85vw] bg-nl-card shadow-lift">
+          <aside className="absolute inset-y-0 left-0 w-72 max-w-[85vw] bg-nl-card shadow-lift overflow-y-auto">
             <button
               type="button"
               onClick={onClose}
@@ -116,7 +115,7 @@ export default function Sidebar({ page, onNavigate, open, onClose, theme, onTogg
             >
               <X className="h-5 w-5" aria-hidden="true" />
             </button>
-            <SidebarBody page={page} onNavigate={onNavigate} theme={theme} onToggleTheme={onToggleTheme} />
+            <SidebarBody page={page} onNavigate={onNavigate} />
           </aside>
         </div>
       )}
@@ -124,21 +123,58 @@ export default function Sidebar({ page, onNavigate, open, onClose, theme, onTogg
   );
 }
 
-export function MobileBar({ onOpen, theme, onToggleTheme }) {
+/** Responsive top bar across all screens with mode switcher in the top right corner. */
+export function TopBar({ page, onOpenNav, theme, onToggleTheme }) {
+  const pageTitles = {
+    dashboard: 'Dashboard',
+    multiplier: 'Arithmetic & Multiplier',
+    booth: 'Booth Algorithm Analyser',
+    history: 'Calculation History',
+    about: 'About Project',
+  };
+
+  const dark = theme === 'dark';
+  const Icon = dark ? Sun : Moon;
+  const label = dark ? 'Light mode' : 'Dark mode';
+
   return (
-    <div className="sticky top-0 z-20 flex items-center justify-between border-b border-nl-border bg-nl-card/90 px-4 py-3 backdrop-blur lg:hidden">
-      <Logo />
-      <div className="flex items-center gap-2">
-        <ThemeToggle theme={theme} onToggle={onToggleTheme} compact />
+    <header className="sticky top-0 z-20 flex h-16 w-full items-center justify-between border-b border-nl-border bg-nl-card/90 px-4 backdrop-blur sm:px-6 lg:px-10">
+      {/* Mobile: Hamburger and Logo */}
+      <div className="flex items-center gap-3 lg:hidden">
         <button
           type="button"
-          onClick={onOpen}
+          onClick={onOpenNav}
           aria-label="Open menu"
-          className="flex h-10 w-10 items-center justify-center rounded-xl border border-nl-border text-nl-ink hover:bg-nl-bg"
+          className="flex h-10 w-10 items-center justify-center rounded-xl border border-nl-border text-nl-ink transition-colors hover:bg-nl-bg"
         >
           <Menu className="h-5 w-5" aria-hidden="true" />
         </button>
+        <Logo />
       </div>
-    </div>
+
+      {/* Desktop: Breadcrumb */}
+      <div className="hidden items-center gap-2 lg:flex">
+        <span className="text-xs font-semibold uppercase tracking-wider text-nl-muted">Workbench</span>
+        <span className="text-nl-muted">/</span>
+        <span className="text-sm font-bold text-nl-ink">{pageTitles[page] || 'Workbench'}</span>
+      </div>
+
+      {/* Top right corner: Mode Switcher */}
+      <div className="flex items-center gap-2">
+        <button
+          type="button"
+          onClick={onToggleTheme}
+          aria-label={`Switch to ${label}`}
+          title={`Switch to ${label}`}
+          className="flex h-10 items-center gap-2 rounded-xl border border-nl-border bg-nl-card px-3 sm:px-3.5 text-xs font-semibold text-nl-ink shadow-xs transition-colors hover:border-blue-300 hover:bg-nl-softblue hover:text-blue-700"
+        >
+          <Icon className={cx('h-4 w-4', dark ? 'text-amber-400' : 'text-nl-blue')} aria-hidden="true" />
+          <span className="font-medium">{label}</span>
+        </button>
+      </div>
+    </header>
   );
 }
+
+// Keep MobileBar export for backwards compatibility
+export const MobileBar = TopBar;
