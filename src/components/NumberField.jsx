@@ -24,7 +24,7 @@ export default function NumberField({ id, label, value, onChange, system, onSyst
           aria-invalid={error ? 'true' : 'false'}
           aria-describedby={`${id}-message`}
           className={cx(
-            'h-11 min-w-0 flex-1 rounded-xl border bg-white px-3.5 font-mono text-[15px] text-nl-ink transition-colors placeholder:text-slate-300',
+            'h-11 min-w-0 flex-1 rounded-xl border bg-nl-card px-3.5 font-mono text-[15px] text-nl-ink transition-colors placeholder:text-slate-300',
             error ? 'border-red-300 focus:border-red-400' : 'border-nl-border hover:border-slate-300 focus:border-nl-blue',
           )}
         />

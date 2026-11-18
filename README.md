@@ -54,4 +54,4 @@ When the multiplicand is the most negative value (for example -8 in 4 bits), A p
 
 ## Design
 
-Light pastel palette from the brief, defined once in `src/index.css` with Tailwind CSS v4 (`@theme`). Utility names are `bg-nl-bg`, `text-nl-ink`, `border-nl-border`, `bg-nl-softblue`, and so on.
+Light pastel palette from the brief plus a matching dark theme. Both are defined as CSS variables in `src/index.css` (Tailwind CSS v4), and the utilities are `bg-nl-bg`, `text-nl-ink`, `border-nl-border`, `bg-nl-softblue`, and so on. The sidebar and the mobile bar have a Sun/Moon toggle. The first visit follows the system setting, and an explicit choice is remembered in localStorage (`useTheme.js`).

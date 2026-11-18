@@ -1,0 +1,116 @@
+@import 'tailwindcss';
+
+/* Colour tokens. The nl-* utilities (bg-nl-bg, text-nl-ink, ...) read these
+   variables, so switching theme only means switching the variables below. */
+@theme inline {
+  --color-nl-bg: var(--nl-bg);
+  --color-nl-card: var(--nl-card);
+  --color-nl-blue: var(--nl-blue);
+  --color-nl-lavender: var(--nl-lavender);
+  --color-nl-softblue: var(--nl-softblue);
+  --color-nl-softpurple: var(--nl-softpurple);
+  --color-nl-ink: var(--nl-ink);
+  --color-nl-muted: var(--nl-muted);
+  --color-nl-border: var(--nl-border);
+}
+
+@theme {
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --shadow-card: 0 1px 2px rgba(23, 37, 84, 0.04), 0 10px 28px -14px rgba(23, 37, 84, 0.14);
+  --shadow-lift: 0 2px 4px rgba(23, 37, 84, 0.05), 0 16px 36px -16px rgba(59, 130, 246, 0.3);
+}
+
+/* Light pastel palette (default). */
+:root {
+  color-scheme: light;
+  --nl-bg: #f5f7ff;
+  --nl-card: #ffffff;
+  --nl-blue: #3b82f6;
+  --nl-lavender: #8b5cf6;
+  --nl-softblue: #dbeafe;
+  --nl-softpurple: #ede9fe;
+  --nl-ink: #172554;
+  --nl-muted: #64748b;
+  --nl-border: #e2e8f0;
+}
+
+/* Dark palette. The same token names, plus the few Tailwind default colours
+   the components use for badges, bit cells and errors. */
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --nl-bg: #0b1020;
+  --nl-card: #131b34;
+  --nl-blue: #3b82f6;
+  --nl-lavender: #a78bfa;
+  --nl-softblue: #172a5c;
+  --nl-softpurple: #2a2160;
+  --nl-ink: #e8edff;
+  --nl-muted: #94a3b8;
+  --nl-border: #27314f;
+
+  --color-blue-100: #1e3a8a;
+  --color-blue-200: #264aa3;
+  --color-blue-700: #93c5fd;
+  --color-violet-100: #4c1d95;
+  --color-violet-200: #5b34b0;
+  --color-violet-700: #c4b5fd;
+  --color-slate-100: #1c2745;
+  --color-slate-200: #2c3860;
+  --color-slate-300: #475579;
+  --color-slate-600: #a3b1c9;
+  --color-red-50: #3b1219;
+  --color-red-200: #7f1d1d;
+  --color-red-300: #b91c1c;
+  --color-red-400: #ef4444;
+  --color-red-600: #f87171;
+  --color-emerald-50: #0b3b32;
+  --color-emerald-700: #6ee7b7;
+  --color-amber-50: #3a2a0a;
+  --color-amber-100: #4a3510;
+  --color-amber-200: #7c5a14;
+  --color-amber-700: #fcd34d;
+  --color-amber-800: #fde68a;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    /* Fluid root size: 16px up to about 1400px wide, then grows smoothly
+       (about 17.6px at 1920px, 20.8px at 2560px, capped at 28px).
+       Every size in the app is in rem, so the whole UI scales with it. */
+    font-size: clamp(1rem, 0.5vw + 0.5rem, 1.75rem);
+  }
+  body {
+    background-color: var(--nl-bg);
+    color: var(--nl-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection {
+    background: var(--nl-softblue);
+  }
+  button:not(:disabled) {
+    cursor: pointer;
+  }
+  :focus-visible {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+  }
+  input:focus-visible,
+  select:focus-visible {
+    outline-offset: 0;
+  }
+}
+
+@utility num {
+  font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

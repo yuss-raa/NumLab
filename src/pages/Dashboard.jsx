@@ -16,7 +16,7 @@ function ModuleCard({ icon: Icon, tone, title, description, tags, cta, onClick }
     <button
       type="button"
       onClick={onClick}
-      className={`group relative overflow-hidden rounded-2xl border border-nl-border bg-linear-to-br ${tones.wash} to-white p-6 text-left shadow-card transition duration-200 hover:-translate-y-0.5 hover:shadow-lift`}
+      className={`group relative overflow-hidden rounded-2xl border border-nl-border bg-linear-to-br ${tones.wash} to-nl-card p-6 text-left shadow-card transition duration-200 hover:-translate-y-0.5 hover:shadow-lift`}
     >
       <span className={`flex h-12 w-12 items-center justify-center rounded-xl ${tones.tile}`}>
         <Icon className="h-6 w-6" aria-hidden="true" />
@@ -25,7 +25,7 @@ function ModuleCard({ icon: Icon, tone, title, description, tags, cta, onClick }
       <p className="mt-1.5 text-sm leading-relaxed text-nl-muted">{description}</p>
       <div className="mt-4 flex flex-wrap gap-2">
         {tags.map((tag) => (
-          <Badge key={tag} tone="slate" className="bg-white/80">
+          <Badge key={tag} tone="slate" className="bg-nl-card/80">
             {tag}
           </Badge>
         ))}

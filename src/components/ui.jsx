@@ -19,9 +19,9 @@ const BUTTON_STYLES = {
   primary: 'bg-nl-blue text-white shadow-sm hover:bg-blue-600',
   soft: 'bg-nl-softblue text-blue-700 hover:bg-blue-200/70',
   purple: 'bg-nl-softpurple text-violet-700 hover:bg-violet-200/70',
-  outline: 'border border-nl-border bg-white text-nl-ink hover:bg-nl-bg',
+  outline: 'border border-nl-border bg-nl-card text-nl-ink hover:bg-nl-bg',
   ghost: 'text-nl-muted hover:bg-nl-bg hover:text-nl-ink',
-  danger: 'border border-red-200 bg-white text-red-600 hover:bg-red-50',
+  danger: 'border border-red-200 bg-nl-card text-red-600 hover:bg-red-50',
 };
 
 export function Button({ variant = 'primary', icon: Icon, children, className, ...rest }) {
@@ -67,7 +67,7 @@ export function Select({ id, value, onChange, options, className, ...rest }) {
         id={id}
         value={value}
         onChange={(event) => onChange(event.target.value)}
-        className="h-11 w-full appearance-none rounded-xl border border-nl-border bg-white pl-3 pr-9 text-sm font-medium text-nl-ink transition-colors hover:border-slate-300 focus:border-nl-blue"
+        className="h-11 w-full appearance-none rounded-xl border border-nl-border bg-nl-card pl-3 pr-9 text-sm font-medium text-nl-ink transition-colors hover:border-slate-300 focus:border-nl-blue"
         {...rest}
       >
         {options.map((option) => (
@@ -130,7 +130,7 @@ export function CopyButton({ text, label = 'Copy', compact = false, className })
       aria-label={`${label} ${text}`}
       className={cx(
         'inline-flex items-center gap-1.5 rounded-lg px-2 py-1 text-xs font-semibold transition-colors',
-        state === 'done' ? 'bg-emerald-50 text-emerald-700' : 'text-nl-muted hover:bg-white hover:text-nl-blue',
+        state === 'done' ? 'bg-emerald-50 text-emerald-700' : 'text-nl-muted hover:bg-nl-card hover:text-nl-blue',
         className,
       )}
     >

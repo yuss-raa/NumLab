@@ -209,7 +209,7 @@ export default function BoothAnalyser({ preset, onSave }) {
                 onChange={(event) => set('bitsText')(event.target.value)}
                 aria-invalid={errors.bits ? 'true' : 'false'}
                 className={cx(
-                  'h-11 w-24 rounded-xl border bg-white px-3.5 font-mono text-[15px] transition-colors',
+                  'h-11 w-24 rounded-xl border bg-nl-card px-3.5 font-mono text-[15px] transition-colors',
                   errors.bits ? 'border-red-300' : 'border-nl-border hover:border-slate-300 focus:border-nl-blue',
                 )}
               />
@@ -222,7 +222,7 @@ export default function BoothAnalyser({ preset, onSave }) {
                     'h-11 rounded-xl border px-3.5 text-sm font-semibold transition-colors',
                     bitsNumber === n
                       ? 'border-blue-200 bg-nl-softblue text-blue-700'
-                      : 'border-nl-border bg-white text-nl-muted hover:text-nl-ink',
+                      : 'border-nl-border bg-nl-card text-nl-muted hover:text-nl-ink',
                   )}
                 >
                   {n}-bit
